@@ -62,7 +62,7 @@ window.App = {
 		}
 		document.getElementById('board').append(table);
 	},
-	useAccountOne: function() {
+	minerJoinGame: function() {
 		account = accounts[1];
 	},
 
@@ -75,13 +75,16 @@ window.App = {
 		})
 			.then((instance) => {
 				gameInstance = instance;
+				console.log(instance);
 
 				$(
 					$('#board').click(function(event) {
-						console.log(event);
+						event.target.innerHTML = 'X';
+						let row = parseInt(event.target.dataset.row);
+						let col = parseInt(event.target.dataset.col);
+						App.setMines(row, col);
 					})
 				);
-				console.log(instance);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -101,6 +104,23 @@ window.App = {
 					console.log(result);
 				});
 		}
+	},
+
+	setMines: function(row, col) {
+		console.log(`${account[0]} is setting up mines!`);
+		console.log(`${row}, ${col} is being set`);
+		gameInstance
+			.SetPosition(row, col, { from: account })
+			.then((result) => {
+				console.log(result);
+			})
+			.then(() => App.printBoard(row, col));
+	},
+
+	printBoard: function() {
+		gameInstance.getBoard.call().then((board) => {
+			console.log(board);
+		});
 	}
 };
 

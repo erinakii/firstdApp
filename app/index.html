@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Game</title>
+  <title>Erina's Decentralized Minesweeper</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="./app.js"></script>
 </head>
@@ -9,8 +9,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-  <h1>My Game</h1>
-  <h2>A Distributed Game</h2>
+  <h1>EtherSweeper</h1>
+  <h2>A Distributed Game: PartnerA sets the mines, PartnerB finds them</h2>
   <table id="board">
         
     </table>
@@ -20,11 +20,11 @@
       </div>
       <br><br>
       <div> 
-        <button id="join" onclick="App.joinGame()" class="btn btn-primary">Join Game</button>
+        <button id="join" onclick="App.joinGame()" class="btn btn-primary"> Setter Join Game</button>
       </div>
       <br><br>
       <div> 
-        <button id="account" onclick="App.useAccountOne()" class="btn btn-primary">Use Account Two</button>
+        <button id="account" onclick="App.minerJoinGame()" class="btn btn-primary">Miner Join Game</button>
       </div>
 <div class="in-game">
   Game-Address: <span id="game-address"></span><br />
