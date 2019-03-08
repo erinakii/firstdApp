@@ -4,6 +4,7 @@ import '../stylesheets/app.css';
 // Import libraries we need.
 import { default as Web3 } from 'web3';
 import { default as contract } from 'truffle-contract';
+import $ from 'jquery';
 
 // Import our contract artifacts and turn them into usable abstractions.
 import game_artifacts from '../../build/contracts/Game.json';
@@ -22,6 +23,9 @@ var gameInstance;
 window.App = {
 	start: function() {
 		var self = this;
+		var height = 3;
+		var width = 3;
+		var cells = [];
 
 		// Bootstrap the MetaCoin abstraction for Use.
 		Game.setProvider(web3.currentProvider);
@@ -42,6 +46,21 @@ window.App = {
 			account = accounts[0];
 			arrEventsFired = [];
 		});
+
+		//initialize board
+		const table = document.createElement('tbody');
+		for (let h = 0; h < height; h++) {
+			const tr = document.createElement('tr');
+			for (let w = 0; w < width; w++) {
+				const td = document.createElement('td');
+				td.dataset.row = h;
+				td.dataset.col = w;
+				cells.push(td);
+				tr.append(td);
+			}
+			table.append(tr);
+		}
+		document.getElementById('board').append(table);
 	},
 	useAccountOne: function() {
 		account = accounts[1];
@@ -56,6 +75,12 @@ window.App = {
 		})
 			.then((instance) => {
 				gameInstance = instance;
+
+				$(
+					$('#board').click(function(event) {
+						console.log(event);
+					})
+				);
 				console.log(instance);
 			})
 			.catch((error) => {
