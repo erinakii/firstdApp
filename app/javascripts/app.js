@@ -79,7 +79,7 @@ window.App = {
 
 				$(
 					$('#board').click(function(event) {
-						event.target.innerHTML = 'X';
+						event.target.innerHTML = 'Mine';
 						let row = parseInt(event.target.dataset.row);
 						let col = parseInt(event.target.dataset.col);
 						App.setMines(row, col);

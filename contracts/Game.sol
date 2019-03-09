@@ -6,7 +6,7 @@ contract Game {
     address[3][3] board;
     uint8 guessCounter;
     uint8 mineCounter;
-    // uint constant public cost = 0.1 ether;
+    // uint constant public cos t = 0.1 ether;
 
     //game players
     address public setter;
@@ -20,8 +20,8 @@ contract Game {
         // require(msg.value == cost, "must provide 0.1 ether");
     }
  
-    function joinGame() public {
-        assert(miner == address(0)); 
+    function joinGame() public { 
+        assert(miner == address(1)); 
         gameActive = true;
         miner = msg.sender;
     }
