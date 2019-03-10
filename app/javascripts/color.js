@@ -17,7 +17,7 @@ window.Color = {
 		window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
 
 		// Bootstrap the MetaCoin abstraction for Use.
-		Game.setProvider(web3.currentProvider);
+		Paint.setProvider(web3.currentProvider);
 
 		// Get the initial account balance so it can be displayed.
 		web3.eth.getAccounts(function(err, accs) {
@@ -33,15 +33,13 @@ window.Color = {
 
 			accounts = accs;
 			account = accounts[0];
-			arrEventsFired = [];
 
 			let player = document.getElementById('player');
 			player.innerHTML = `Current player is ${account}`;
-		});
-	},
 
-	loadTable: function() {
-		//parameters
+			Color.startPaint();
+		});
+
 		var height = 20;
 		var width = 20;
 		var cells = [];
@@ -63,7 +61,7 @@ window.Color = {
 	},
 
 	startPaint: function() {
-		console.log('Hello, start painting');
+		console.log(account);
 		Paint.new({
 			from: account,
 			value: web3.toWei(0.1, 'ether'),
@@ -79,7 +77,7 @@ window.Color = {
 						let row = parseInt(event.target.dataset.row);
 						let col = parseInt(event.target.dataset.col);
 
-						App.setPaint(row, col);
+						Color.setPaint(row, col);
 					})
 				);
 			})
@@ -91,18 +89,18 @@ window.Color = {
 	setPaint: function(row, col) {
 		paintInstance
 			.setPaint(row, col, {
-				from: account,
-				value: web3.toWei(0.1, 'ether'),
-				gas: 3000000
+				from: account
+				// value: web3.toWei(0.1, 'ether'),
+				// gas: 3000000
 			})
 			.then((result) => {
 				console.log(result);
 			})
-			.then(() => printBoard());
+			.then(() => Color.printBoard());
 	},
 
 	printBoard: function() {
-		gameInstance.getBoard.call().then((board) => {
+		paintInstance.getBoard.call().then((board) => {
 			console.log(board);
 		});
 	}
@@ -121,6 +119,4 @@ window.Color = {
 // 		);
 // 		window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
 // 	}
-
-// 	Color.start();
 // });

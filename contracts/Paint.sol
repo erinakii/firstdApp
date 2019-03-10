@@ -5,11 +5,15 @@ contract Paint {
     uint public boardSize = 20;
     address[20][20] board;
     string public color;
-    //painter 
-    address public painter;
+    uint constant public cost = 0.1 ether;
 
-    constructor() public {
+    //painter 
+    address payable public painter;
+
+    constructor() public payable {
         painter = msg.sender;
+        require(msg.value == cost, "must provide 0.1 ether");
+
     }
 
     function getBoard() public view returns(address[20][20] memory){
