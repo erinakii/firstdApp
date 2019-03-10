@@ -14,17 +14,15 @@
   <table id="board">
         
     </table>
+    <div id ='player'></div>
+
     <br><br>
       <div class="game-start">
         <button id="create" onclick="App.createNewGame()" class="btn btn-primary">Create Game</button> 
       </div>
-      <br><br>
+      <br>
       <div> 
-        <button id="join" onclick="App.joinGame()" class="btn btn-primary"> Setter Join Game</button>
-      </div>
-      <br><br>
-      <div> 
-        <button id="account" onclick="App.minerJoinGame()" class="btn btn-primary">Miner Join Game</button>
+        <button id="account" onclick="App.togglePlayer()" class="btn btn-primary">Toggle Player</button>
       </div>
 <div class="in-game">
   Game-Address: <span id="game-address"></span><br />

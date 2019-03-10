@@ -45,6 +45,9 @@ window.App = {
 			accounts = accs;
 			account = accounts[0];
 			arrEventsFired = [];
+
+			let player = document.getElementById('player');
+			player.innerHTML = `Current player is ${account}`;
 		});
 
 		//initialize board
@@ -62,16 +65,21 @@ window.App = {
 		}
 		document.getElementById('board').append(table);
 	},
-	minerJoinGame: function() {
-		account = accounts[1];
+
+	togglePlayer: function() {
+		if (account === accounts[0]) {
+			account = accounts[1];
+			let player = document.getElementById('player');
+			player.innerHTML = `Current player is ${account}`;
+		}
 	},
 
 	createNewGame: function() {
 		console.log('Hello! This is a new game');
 		Game.new({
-			from: account
-			// value: web3.toWei(0.1, 'ether'),
-			// gas: 4000000
+			from: account,
+			value: web3.toWei(0.1, 'ether'),
+			gas: 3000000
 		})
 			.then((instance) => {
 				gameInstance = instance;
@@ -79,10 +87,21 @@ window.App = {
 
 				$(
 					$('#board').click(function(event) {
-						event.target.innerHTML = 'Mine';
+						let value;
+						if (account === accounts[0]) {
+							value = 'hello';
+						} else {
+							value = 'goodbye';
+						}
+						event.target.innerHTML = `${value}`;
 						let row = parseInt(event.target.dataset.row);
 						let col = parseInt(event.target.dataset.col);
-						App.setMines(row, col);
+
+						if (account === accounts[0]) {
+							App.setMines(row, col);
+						} else {
+							App.findMines(row, col);
+						}
 					})
 				);
 			})
@@ -91,26 +110,39 @@ window.App = {
 			});
 	},
 
-	joinGame: function() {
-		console.log('Hello, you have joined the game');
-		var gameAddress = prompt('Address of the Game');
-		if (gameAddress != null) {
-			Game.at(gameAddress)
-				.then((instance) => {
-					gameInstance = instance;
-					return gameInstance.joinGame({ from: account });
-				})
-				.then((result) => {
-					console.log(result);
-				});
-		}
-	},
+	// joinGame: function() {
+	// 	var gameAddress = prompt('Address of the Game');
+	// 	if (gameAddress != null) {
+	// 		Game.at(gameAddress)
+	// 			.then((instance) => {
+	// 				gameInstance = instance;
+	// 				return gameInstance.joinGame({ from: account, value: web3.toWei(0.1, 'ether'), gas: 300000 });
+	// 			})
+	// 			.then((result) => {
+	// 				console.log(result);
+	// 			});
+	// 	}
+	// },
 
 	setMines: function(row, col) {
-		console.log(`${account[0]} is setting up mines!`);
+		console.log(`${account} is setting up mines!`);
 		console.log(`${row}, ${col} is being set`);
 		gameInstance
 			.SetPosition(row, col, { from: account })
+			.then((result) => {
+				console.log(result);
+			})
+			.then(() => App.printBoard(row, col));
+	},
+
+	findMines: function(row, col) {
+		console.log(`${account} is looking for mines!`);
+		gameInstance
+			.FindPosition(row, col, {
+				from: account,
+				value: web3.toWei(0.1, 'ether'),
+				gas: 3000000
+			})
 			.then((result) => {
 				console.log(result);
 			})
@@ -126,19 +158,19 @@ window.App = {
 
 window.addEventListener('load', function() {
 	// Checking if Web3 has been injected by the browser (Mist/MetaMask)
-	if (typeof web3 !== 'undefined') {
-		console.warn(
-			"Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask"
-		);
-		// Use Mist/MetaMask's provider
-		window.web3 = new Web3(web3.currentProvider);
-	} else {
-		console.warn(
-			"No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask"
-		);
-		// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-		window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
-	}
+	// if (typeof web3 !== 'undefined') {
+	// 	console.warn(
+	// 		"Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask"
+	// 	);
+	// 	// Use Mist/MetaMask's provider
+	// 	window.web3 = new Web3(web3.currentProvider);
+	// } else {
+	// 	console.warn(
+	// 		"No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask"
+	// 	);
+	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+	window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
+	// }
 
 	App.start();
 });
