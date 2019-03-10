@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script defer src="./app.js"></script>
-    <script defer src="./color.js"></script>
+    <script defer src="./javascripts/color.js"></script>
   </head>
   <body>
     <div class='has-text-centered'>
@@ -17,8 +17,11 @@
           <div id ='player'></div>
           <br><br>
         <div class="game-start">
-          <button class ='button is-primary' onclick="App.createNewGame()" class="btn btn-primary">Play Tic Tac Toe</button> 
+          <button class ='button is-primary' onclick="App.start()" class="btn btn-primary">Play Tic Tac Toe</button> 
         </div>
+        <div class="game-start">
+            <button class ='button is-primary' onclick="Color.start()" class="btn btn-primary">Play Colors</button> 
+          </div>
         <br>
         <div> 
           <button class ='button is-primary' onclick="App.togglePlayer()" class="btn btn-primary">Toggle Player</button>
