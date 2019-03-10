@@ -13,8 +13,27 @@ var account;
 var paintInstance;
 
 window.Color = {
+	load: function() {
+		if (typeof web3 !== 'undefined') {
+			console.warn(
+				"Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask"
+			);
+			// Use Mist/MetaMask's provider
+			window.web3 = new Web3(web3.currentProvider);
+		} else {
+			console.warn(
+				"No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask"
+			);
+			window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
+		}
+		Color.start();
+	},
+
 	start: function() {
-		window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
+		let title = document.getElementById('title');
+		title.innerHTML = 'You are now painting!';
+
+		// window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
 
 		// Bootstrap the MetaCoin abstraction for Use.
 		Paint.setProvider(web3.currentProvider);
@@ -105,18 +124,3 @@ window.Color = {
 		});
 	}
 };
-
-// window.addEventListener('load', function() {
-// 	if (typeof web3 !== 'undefined') {
-// 		console.warn(
-// 			"Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask"
-// 		);
-// 		// Use Mist/MetaMask's provider
-// 		window.web3 = new Web3(web3.currentProvider);
-// 	} else {
-// 		console.warn(
-// 			"No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask"
-// 		);
-// 		window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'));
-// 	}
-// });

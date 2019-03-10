@@ -1,3 +1,8 @@
+html {
+  background: black;
+  color: red;
+}
+
 #board {
   width:300px;
   height:300px;
@@ -10,11 +15,7 @@
   width: 33.333%;
   height: 33.333%;
 }
-
-.in-game{
-  display: none;
-}
-
 .blue {
   background-color: aquamarine;
 }
+

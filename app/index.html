@@ -8,22 +8,23 @@
   </head>
   <body>
     <div class='has-text-centered'>
-      <h1 class ="title is-1">Decentralized Arcade</h1>
+      <h1 class ="title is-1 has-text-link">Decentralized Arcade</h1>
+      <h1 id='title' class ="subtitle is-2"></h1>
+      <span>
+      <button class ='button is-danger' onclick="App.start()" class="btn btn-primary">Play Tic Tac Toe</button>
+      </span>
+      <span>
+      <button class ='button is-danger' onclick="Color.start()" class="btn btn-primary">Play Colors</button>
+      </span>
+      <br>
+      <br>
     <div class="container">
         <div class="col-lg-12 text-center">
-          <h1 id='title' class ="subtitle is-1"></h1>
           <table id="board" class='table is-hoverable'></table>
           <div id ='player'></div>
           <br><br>
-        <div class="game-start">
-          <button class ='button is-primary' onclick="App.start()" class="btn btn-primary">Play Tic Tac Toe</button> 
-        </div>
-        <div class="game-start">
-            <button class ='button is-primary' onclick="Color.start()" class="btn btn-primary">Play Colors</button> 
-          </div>
-        <br>
         <div> 
-          <button class ='button is-primary' onclick="App.togglePlayer()" class="btn btn-primary">Toggle Player</button>
+          <button class ='button is-light' onclick="App.togglePlayer()" class="btn btn-primary">Toggle Player</button>
         </div>
       </div>
 </div>
