@@ -16,7 +16,7 @@ contract Paint {
         return board;
     }
 
-    function setColor(string clr) public {
+    function setColor(string memory clr) public {
         color = clr;
     }
 
