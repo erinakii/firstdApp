@@ -48,7 +48,7 @@ contract Game {
         assert(y < boardSize);
 
         //ensures no more than 3 mines set
-        require(mineCounter <= 3, "You have already set 3 mines!");
+        // require(mineCounter <= 3, "You have already set 3 mines!");
 
         //position is assigned to the sender
         board[x][y] = msg.sender;

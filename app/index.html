@@ -1,33 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Erina's Decentralized Minesweeper</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="./app.js"></script>
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-  <h1>EtherSweeper</h1>
-  <h2>A Distributed Game: PartnerA sets the mines, PartnerB finds them</h2>
-  <table id="board">
-        
-    </table>
-    <div id ='player'></div>
-
-    <br><br>
-      <div class="game-start">
-        <button id="create" onclick="App.createNewGame()" class="btn btn-primary">Create Game</button> 
+  <head>
+    <title>Erina's Decentralized Arcade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class='has-text-centered'>
+      <h1 class ="title is-1">Decentralized Arcade</h1>
+    <div class="container">
+        <div class="col-lg-12 text-center">
+          <h1 class ="subtitle is-1">Tic Tac Toe</h1>
+          <table id="board" class='table is-hoverable'></table>
+          <div id ='player'></div>
+          <br><br>
+        <div class="game-start">
+          <button class ='button is-primary' onclick="App.createNewGame()" class="btn btn-primary">Play Tic Tac Toe</button> 
+        </div>
+        <br>
+        <div> 
+          <button class ='button is-primary' onclick="App.togglePlayer()" class="btn btn-primary">Toggle Player</button>
+        </div>
       </div>
-      <br>
-      <div> 
-        <button id="account" onclick="App.togglePlayer()" class="btn btn-primary">Toggle Player</button>
-      </div>
-<div class="in-game">
-  Game-Address: <span id="game-address"></span><br />
-  <div class="waiting-for-join">Opponent-Address: <span id="opponent-address"></span></div>
-</div>
 </div>
 </body>
 </html>

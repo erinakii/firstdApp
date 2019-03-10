@@ -5,6 +5,7 @@
 }
 
 #board td {
+  text-align: center;
   border: 1px solid;
   width: 33.333%;
   height: 33.333%;

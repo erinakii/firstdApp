@@ -69,9 +69,11 @@ window.App = {
 	togglePlayer: function() {
 		if (account === accounts[0]) {
 			account = accounts[1];
-			let player = document.getElementById('player');
-			player.innerHTML = `Current player is ${account}`;
+		} else {
+			account = accounts[0];
 		}
+		let player = document.getElementById('player');
+		player.innerHTML = `Current player is ${account}`;
 	},
 
 	createNewGame: function() {
@@ -89,19 +91,15 @@ window.App = {
 					$('#board').click(function(event) {
 						let value;
 						if (account === accounts[0]) {
-							value = 'hello';
+							value = 'X';
 						} else {
-							value = 'goodbye';
+							value = 'O';
 						}
 						event.target.innerHTML = `${value}`;
 						let row = parseInt(event.target.dataset.row);
 						let col = parseInt(event.target.dataset.col);
 
-						if (account === accounts[0]) {
-							App.setMines(row, col);
-						} else {
-							App.findMines(row, col);
-						}
+						App.setMines(row, col);
 					})
 				);
 			})
