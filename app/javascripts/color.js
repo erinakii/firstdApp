@@ -92,7 +92,7 @@ window.Color = {
 
 				$(
 					$('#board').click(function(event) {
-						event.target.className = 'blue';
+						event.target.className = 'red';
 						let row = parseInt(event.target.dataset.row);
 						let col = parseInt(event.target.dataset.col);
 
